@@ -38,7 +38,9 @@ def fetch(root: Path) -> Path:
 
 
 def interpreter(example: Path, mcpp: str, toolchain: str | None) -> Path:
-    command = [mcpp, 'build'] + (['--toolchain', toolchain] if toolchain else [])
+    # Optimised, as upstream's lua is: the stack-overflow tests size the C
+    # stack for it (an unoptimised build's frames overflow Windows' 1 MB).
+    command = [mcpp, 'build', '--profile', 'release'] + (['--toolchain', toolchain] if toolchain else [])
     print('+', ' '.join(command), flush=True)
     subprocess.run(command, cwd=example, check=True)
     name = 'lua.exe' if os.name == 'nt' else 'lua'
