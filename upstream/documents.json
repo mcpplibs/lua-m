@@ -1,0 +1,22 @@
+{
+  "upstream": "https://www.lua.org/ftp/lua-5.4.7.tar.gz",
+  "upstream_sha256": "9fbf5e28ef86c69858f6d3d34eccc32e911c1a28b4120ff3e84aaa70cfbf1e30",
+  "pruning": "Nothing of Lua is vendored: the library is compat.lua 5.4.7, built from the same tarball. Its README is retained here, and its license, which Lua publishes as the notice at the end of src/lua.h (lines 498-519), as LICENSE.",
+  "documents": [
+    {
+      "path": "upstream/lua/README",
+      "source": "https://www.lua.org/ftp/lua-5.4.7.tar.gz (lua-5.4.7/README)",
+      "sha256": "87c2e15dbb8982507c14ee2682368d7ac2c68b43d64595fbb29661227b9ec560"
+    },
+    {
+      "path": "upstream/lua/LICENSE",
+      "source": "https://www.lua.org/ftp/lua-5.4.7.tar.gz (lua-5.4.7/src/lua.h, lines 498-519)",
+      "sha256": "a0a9f1b6770a2daf6875e36f1778e368587f8532d1238e63d0ebec4166d7789b"
+    }
+  ],
+  "tests": {
+    "url": "https://www.lua.org/tests/lua-5.4.7-tests.tar.gz",
+    "sha256": "8a4898ffe4c7613c8009327a0722db7a41ef861d526c77c5b46114e59ebf811e",
+    "run": "lua -e\"_U=true\" all.lua (the user tests: portable, no internal-test build), with examples/lua as lua"
+  }
+}

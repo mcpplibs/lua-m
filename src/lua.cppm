@@ -1,0 +1,194 @@
+// mcpplibs.mwrap.lua — Lua 5.4, the embeddable scripting language, as a C++
+// module. Every exported name is the upstream global of <lua.h>, <lauxlib.h>
+// and <lualib.h>, unchanged (lua.hpp declares them extern "C"); the root also
+// re-exports the macro mappings. The library is compat.lua, built from the
+// same release. tools/check_exports.py audits this list against the headers.
+module;
+#include <lua.hpp>
+
+export module mcpplibs.mwrap.lua;
+
+export import mcpplibs.mwrap.lua.macros;
+
+// <lua.h>
+// types
+export using ::lua_State;
+export using ::lua_Number;
+export using ::lua_Integer;
+export using ::lua_Unsigned;
+export using ::lua_KContext;
+export using ::lua_CFunction;
+export using ::lua_KFunction;
+export using ::lua_Reader;
+export using ::lua_Writer;
+export using ::lua_Alloc;
+export using ::lua_WarnFunction;
+export using ::lua_Debug;
+export using ::lua_Hook;
+// the version string the library was built with
+export using ::lua_ident;
+// functions (98)
+export using ::lua_newstate;
+export using ::lua_close;
+export using ::lua_newthread;
+export using ::lua_closethread;
+export using ::lua_resetthread;
+export using ::lua_atpanic;
+export using ::lua_version;
+export using ::lua_absindex;
+export using ::lua_gettop;
+export using ::lua_settop;
+export using ::lua_pushvalue;
+export using ::lua_rotate;
+export using ::lua_copy;
+export using ::lua_checkstack;
+export using ::lua_xmove;
+export using ::lua_isnumber;
+export using ::lua_isstring;
+export using ::lua_iscfunction;
+export using ::lua_isinteger;
+export using ::lua_isuserdata;
+export using ::lua_type;
+export using ::lua_typename;
+export using ::lua_tonumberx;
+export using ::lua_tointegerx;
+export using ::lua_toboolean;
+export using ::lua_tolstring;
+export using ::lua_rawlen;
+export using ::lua_tocfunction;
+export using ::lua_touserdata;
+export using ::lua_tothread;
+export using ::lua_topointer;
+export using ::lua_arith;
+export using ::lua_rawequal;
+export using ::lua_compare;
+export using ::lua_pushnil;
+export using ::lua_pushnumber;
+export using ::lua_pushinteger;
+export using ::lua_pushlstring;
+export using ::lua_pushstring;
+export using ::lua_pushvfstring;
+export using ::lua_pushfstring;
+export using ::lua_pushcclosure;
+export using ::lua_pushboolean;
+export using ::lua_pushlightuserdata;
+export using ::lua_pushthread;
+export using ::lua_getglobal;
+export using ::lua_gettable;
+export using ::lua_getfield;
+export using ::lua_geti;
+export using ::lua_rawget;
+export using ::lua_rawgeti;
+export using ::lua_rawgetp;
+export using ::lua_createtable;
+export using ::lua_newuserdatauv;
+export using ::lua_getmetatable;
+export using ::lua_getiuservalue;
+export using ::lua_setglobal;
+export using ::lua_settable;
+export using ::lua_setfield;
+export using ::lua_seti;
+export using ::lua_rawset;
+export using ::lua_rawseti;
+export using ::lua_rawsetp;
+export using ::lua_setmetatable;
+export using ::lua_setiuservalue;
+export using ::lua_callk;
+export using ::lua_pcallk;
+export using ::lua_load;
+export using ::lua_dump;
+export using ::lua_yieldk;
+export using ::lua_resume;
+export using ::lua_status;
+export using ::lua_isyieldable;
+export using ::lua_setwarnf;
+export using ::lua_warning;
+export using ::lua_gc;
+export using ::lua_error;
+export using ::lua_next;
+export using ::lua_concat;
+export using ::lua_len;
+export using ::lua_stringtonumber;
+export using ::lua_getallocf;
+export using ::lua_setallocf;
+export using ::lua_toclose;
+export using ::lua_closeslot;
+export using ::lua_getstack;
+export using ::lua_getinfo;
+export using ::lua_getlocal;
+export using ::lua_setlocal;
+export using ::lua_getupvalue;
+export using ::lua_setupvalue;
+export using ::lua_upvalueid;
+export using ::lua_upvaluejoin;
+export using ::lua_sethook;
+export using ::lua_gethook;
+export using ::lua_gethookmask;
+export using ::lua_gethookcount;
+export using ::lua_setcstacklimit;
+
+// <lauxlib.h>
+// types
+export using ::luaL_Reg;
+export using ::luaL_Buffer;
+export using ::luaL_Stream;
+// functions (45)
+export using ::luaL_checkversion_;
+export using ::luaL_getmetafield;
+export using ::luaL_callmeta;
+export using ::luaL_tolstring;
+export using ::luaL_argerror;
+export using ::luaL_typeerror;
+export using ::luaL_checklstring;
+export using ::luaL_optlstring;
+export using ::luaL_checknumber;
+export using ::luaL_optnumber;
+export using ::luaL_checkinteger;
+export using ::luaL_optinteger;
+export using ::luaL_checkstack;
+export using ::luaL_checktype;
+export using ::luaL_checkany;
+export using ::luaL_newmetatable;
+export using ::luaL_setmetatable;
+export using ::luaL_testudata;
+export using ::luaL_checkudata;
+export using ::luaL_where;
+export using ::luaL_error;
+export using ::luaL_checkoption;
+export using ::luaL_fileresult;
+export using ::luaL_execresult;
+export using ::luaL_ref;
+export using ::luaL_unref;
+export using ::luaL_loadfilex;
+export using ::luaL_loadbufferx;
+export using ::luaL_loadstring;
+export using ::luaL_newstate;
+export using ::luaL_len;
+export using ::luaL_addgsub;
+export using ::luaL_gsub;
+export using ::luaL_setfuncs;
+export using ::luaL_getsubtable;
+export using ::luaL_traceback;
+export using ::luaL_requiref;
+export using ::luaL_buffinit;
+export using ::luaL_prepbuffsize;
+export using ::luaL_addlstring;
+export using ::luaL_addstring;
+export using ::luaL_addvalue;
+export using ::luaL_pushresult;
+export using ::luaL_pushresultsize;
+export using ::luaL_buffinitsize;
+
+// <lualib.h>
+// functions (11)
+export using ::luaopen_base;
+export using ::luaopen_coroutine;
+export using ::luaopen_table;
+export using ::luaopen_io;
+export using ::luaopen_os;
+export using ::luaopen_string;
+export using ::luaopen_utf8;
+export using ::luaopen_math;
+export using ::luaopen_debug;
+export using ::luaopen_package;
+export using ::luaL_openlibs;

@@ -1,0 +1,51 @@
+// {{project.name}} — Lua embedded through import mcpplibs.mwrap.lua: a C++
+// function registered for scripts, a script run with lua_pcall, its result
+// and its errors read back.
+import std;
+import mcpplibs.mwrap.lua;
+
+using namespace mcpplibs::mwrap::lua::macros;  // lua_pop, lua_tostring, LUA_OK …
+
+constexpr std::string_view sample = R"(
+local words = {}
+for word in ("modules make C libraries feel native"):gmatch("%a+") do
+  words[#words + 1] = shout(word)
+end
+return table.concat(words, " "), #words
+)";
+
+// shout(word): the word in capitals — a C++ function scripts call.
+int shout(lua_State* L) {
+    std::string word = luaL_checkstring(L, 1);
+    std::ranges::transform(word, word.begin(), [](unsigned char c) { return static_cast<char>(std::toupper(c)); });
+    lua_pushlstring(L, word.data(), word.size());
+    return 1;
+}
+
+int main(int argc, char** argv) {
+    std::string script(sample);
+    if (argc > 1) {
+        std::ifstream in(argv[1], std::ios::binary);
+        if (!in) {
+            std::println(std::cerr, "cannot read {}", argv[1]);
+            return 1;
+        }
+        script.assign(std::istreambuf_iterator<char>(in), {});
+    }
+    lua_State* L = luaL_newstate();
+    luaL_openlibs(L);
+    lua_register(L, "shout", shout);
+    const int top = lua_gettop(L);
+    if (luaL_loadbuffer(L, script.data(), script.size(), "=script") != LUA_OK || lua_pcall(L, 0, LUA_MULTRET, 0) != LUA_OK) {
+        std::println(std::cerr, "{}", lua_tostring(L, -1));
+        lua_close(L);
+        return 1;
+    }
+    for (int i = top + 1; i <= lua_gettop(L); ++i) {
+        std::println("{}: {}", luaL_typename(L, i), luaL_tolstring(L, i, nullptr));
+        lua_pop(L, 1);  // what luaL_tolstring pushed
+    }
+    std::println("({})", LUA_RELEASE);
+    lua_close(L);
+    return 0;
+}

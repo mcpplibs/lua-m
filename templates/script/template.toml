@@ -1,0 +1,4 @@
+[template]
+description  = "Embed Lua with import mcpplibs.mwrap.lua: a C++ function a script calls, a script's result read back"
+default      = true
+post_message = "Run `mcpp run`, or `mcpp run -- <file.lua>` for your own script."

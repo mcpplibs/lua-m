@@ -1,0 +1,12 @@
+[package]
+name        = "interpreter"
+version     = "0.1.0"
+description = "A standalone Lua interpreter (lua [-e stat] [-l name] [-v] [script [args]]) written against import mcpplibs.mwrap.lua; the program upstream's test suite runs on"
+license     = "Apache-2.0"
+
+[targets.lua]
+kind = "bin"
+main = "src/main.cpp"
+
+[dependencies]
+"mcpplibs.mwrap.lua" = { path = "../.." }

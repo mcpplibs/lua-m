@@ -1,0 +1,43 @@
+# Module wrapper; upstream API preserved. Policy: mcpp-index/docs/mwrap.md.
+[package]
+namespace   = "mcpplibs.mwrap"
+name        = "lua"
+version     = "5.4.7"
+description = "Lua 5.4.7 C++ modules for mcpp (import mcpplibs.mwrap.lua;): the C API of lua.h, lauxlib.h and lualib.h over compat.lua, its macros as constants and functions"
+license     = "Apache-2.0"
+authors     = ["mcpp-community"]
+repo        = "https://github.com/mcpplibs/lua-m"
+platforms   = ["linux", "macos", "windows"]
+
+[targets.lua]
+kind = "lib"
+
+[build]
+sources      = ["src/*.cppm"]
+# <mwrap/lua/macros.hpp>: the macros a function cannot be.
+include_dirs = ["include"]
+
+[dependencies]
+compat.lua = "5.4.7"
+
+[dev-dependencies]
+compat.gtest = "1.15.2"
+
+[package.metadata.mwrap]
+upstream-version = "5.4.7"
+
+[[runtime.deploy]]
+from = "LICENSE"
+to   = "licenses/lua"
+
+[[runtime.deploy]]
+from = "NOTICE"
+to   = "licenses/lua"
+
+[[runtime.deploy]]
+from = "upstream/lua/README"
+to   = "licenses/lua/upstream/lua"
+
+[[runtime.deploy]]
+from = "upstream/lua/LICENSE"
+to   = "licenses/lua/upstream/lua"

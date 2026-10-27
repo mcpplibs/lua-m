@@ -1,0 +1,10 @@
+lua-m: C++ module wrapper
+Copyright (c) 2026 mcpp-community contributors
+
+The wrapper contributions are licensed under the Apache License, Version 2.0.
+Upstream code, copied interfaces and dependencies retain their original
+licenses and copyright notices. Lua is Copyright (C) 1994-2024 Lua.org,
+PUC-Rio, and is distributed under the MIT license; its original README and
+license notice are retained in upstream/lua/. The library itself is built by
+compat.lua from the same release. Provenance and checksums are recorded in
+upstream/documents.json.
