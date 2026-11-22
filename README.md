@@ -25,7 +25,7 @@ passes on every CI run, on a standalone interpreter written against the module.
 ## Getting started
 
 ```sh
-mcpp new scripted --template mcpplibs.mwrap.lua@5.4.7
+mcpp new scripted --template mcpplibs.mwrap.lua@5.4.7.1
 cd scripted
 mcpp run
 ```
@@ -35,7 +35,7 @@ prints what the script returns.
 
 ```toml
 [dependencies]
-"mcpplibs.mwrap.lua" = "5.4.7"
+mcpplibs.mwrap.lua = "5.4.7.1"
 ```
 
 ```cpp
